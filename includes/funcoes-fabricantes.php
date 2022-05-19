@@ -26,7 +26,7 @@ function lerFabricantes($conexao){
 // var_dump(lerFabricantes($conexao));
 
 function inserirFabricante($conexao, $nome){
-    $sql = "INSERT INTO FABRICANTES(nome) VALUES('$nome')";
+    $sql = "INSERT INTO fabricantes(nome) VALUES('$nome')";
     mysqli_query($conexao, $sql) or die(mysqli_error($conexao));
 }
 
