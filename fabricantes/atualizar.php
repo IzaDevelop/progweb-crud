@@ -1,3 +1,16 @@
+<?php
+require '../includes/funcoes-fabricantes.php';
+// capturar o parametro id da URL
+$id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
+// chamamos a função que irá retornar os dados de UM fabricante
+$dados = lerUmFabricante($conexao, $id);
+// detectar o acionamento do botão atualizar
+if(isset($_POST['atualizar'])){
+    $nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_SPECIAL_CHARS);
+    atualizarFabricante($conexao, $id, $nome);
+    header("location:listar.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -21,7 +34,7 @@
 
 	    <p>
             <label for="nome">Nome:</label><br>
-	        <input type="text" name="nome" id="nome" required>
+	        <input value="<?=$dados['nome']?>" type="text" name="nome" id="nome" required>
         </p>   
         <button name="atualizar">Atualizar fabricante</button>
 	</form>	
