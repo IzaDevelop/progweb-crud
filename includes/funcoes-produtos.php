@@ -18,7 +18,7 @@ function lerProdutos($conexao){
 }
 
 //teste
-var_dump(lerProdutos($conexao));
+// var_dump(lerProdutos($conexao));
 
 function inserirProduto($conexao, $nome){
     $sql = "INSERT INTO produtos(nome) VALUES('$nome')";
