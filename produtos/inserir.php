@@ -1,3 +1,17 @@
+<?php
+require "../includes/funcoes-fabricantes.php";
+require "../includes/funcoes-produtos.php";
+$listaDeFabricantes = lerFabricantes($conexao);
+if(isset($_POST['inserir'])){
+    $nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_SPECIAL_CHARS);
+    $preco = filter_input(INPUT_POST, 'preco', FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+    $quantidade = filter_input(INPUT_POST, 'quantidade', FILTER_SANITIZE_NUMBER_INT);
+    $descricao = filter_input(INPUT_POST, 'descricao', FILTER_SANITIZE_SPECIAL_CHARS);
+    $fabricanteId = filter_input(INPUT_POST, 'fabricante', FILTER_SANITIZE_NUMBER_INT);
+    inserirProduto($conexao, $nome, $preco, $quantidade, $descricao, $fabricanteId);
+    header("location:listar.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -28,9 +42,11 @@
             <label for="fabricante">Fabricante:</label>
             <select name="fabricante" id="fabricante" required>
                 <option value=""></option>
-
-                
-                
+        <?php
+        foreach($listaDeFabricantes as $fabricante){
+        ?>
+                <option value="<?=$fabricante['id']?>"><?=$fabricante['nome']?></option>
+        <?php } ?>
             </select>
         </p>
 
