@@ -35,12 +35,16 @@ function lerUmProduto($conexao, $id){
     return mysqli_fetch_assoc($resultado);
 }
 
-function atualizarProduto($conexao, $id, $nome, $preco, $quantidade, $descricao){
-    $sql = "UPDATE produtos SET nome = '$nome', preco = $preco, quantidade = $quantidade, descricao = '$descricao' WHERE id = $id";
+function atualizarProduto($conexao, $id, $nome, $preco, $quantidade, $descricao, $fabricanteId){
+    $sql = "UPDATE produtos SET nome = '$nome', preco = $preco, quantidade = $quantidade, descricao = '$descricao', fabricantes_id = $fabricanteId WHERE id = $id";
     mysqli_query($conexao, $sql) or die(mysqli_error($conexao));
 }
 
 function excluirProduto($conexao, $id){
     $sql = "DELETE FROM produtos WHERE id = $id";
     mysqli_query($conexao, $sql) or die(mysqli_error($conexao));
+}
+
+function formataMoeda($valor){
+    return "R$ ".number_format($valor, 2, ",", ".");
 }

@@ -8,37 +8,44 @@ $listaDeProdutos = lerProdutos($conexao);
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Produtos | SELECT - CRUD com PHP e MySQL </title>
-<link href="../css/style.css" rel="stylesheet">
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+<!-- Meu CSS -->
+<!-- <link href="../css/style.css" rel="stylesheet"> -->
 </head>
 <body>
 
 <div class="container">
-    <h1>Produtos | SELECT -
+    <h1 class="text-center">Produtos | SELECT -
     <a href="../index.php">Home</a> </h1>
 </div>
 
 <div class="container">
     
     <h2>Lendo e carregando todos os produtos</h2>
-    <p><a href="inserir.php">Inserir</a></p>  
+    <p><a class="btn btn-outline-primary btn-lg" href="inserir.php" href="inserir.php">Inserir</a></p>  
 
     <hr>
-
-<?php
-foreach($listaDeProdutos as $produto){
-?>
-    <ul>
-        <li><b>Nome:</b> <?=$produto['produto']?></li>
-        <li><b>Preço:</b> <?=$produto['preco']?></li>
-        <li><b>Quantidade:</b> <?=$produto['quantidade']?></li>
-        <li><b>Descrição:</b>  <?=$produto['descricao']?></li>
-        <li><b>Fabricante:</b> <?=$produto['fabricante']?></li>
-    </ul>
-    <a href="atualizar.php?id=<?=$produto['id']?>">Atualizar</a> - 
-    <a href="excluir.php?id=<?=$produto['id']?>">Excluir</a>
+    <div class="row">
+        <?php
+        foreach($listaDeProdutos as $produto){
+        ?>
+            <article class="col-lg-4 col-md-6 col-sm-12 card">
+                <section class="card-body">
+                    <h3 class="card-header text-center"> <?=$produto['produto']?></h3>
+                    <p><b>Preço:</b> <?=formataMoeda($produto['preco'])?></p>
+                    <p><b>Quantidade:</b> <?=$produto['quantidade']?></p>
+                    <p><b>Descrição:</b>  <?=$produto['descricao']?></p>
+                    <p><b>Fabricante:</b> <?=$produto['fabricante']?></p>
+                    <p>
+                        <a class="btn btn-warning" href="atualizar.php?id=<?=$produto['id']?>">Atualizar</a> 
+                        <a class="btn btn-danger" href="excluir.php?id=<?=$produto['id']?>">Excluir</a>
+                    </p>
+                </section>
+            </article>
+        <?php } ?>
+    </div>
 </div>
-<?php } ?>
-
 
 </body>
 </html>
